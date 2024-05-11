@@ -5,12 +5,14 @@ import User from "../models/user.model.js";
 export const signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
+
     const emailRegex =
       /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
 
     if (!emailRegex.test(email)) {
       return res.status(400).json({ error: "유효하지 않은 이메일입니다." });
     }
+
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(400).json({ error: " 이미 사용중입니다." });
@@ -20,6 +22,7 @@ export const signup = async (req, res) => {
     if (existingEmail) {
       return res.status(400).json({ error: "이미 가입된 이메일입니다." });
     }
+
     const passwordRegex =
       /^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
 

@@ -2,6 +2,7 @@ import Notification from "../models/notification.medel.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import { v2 as cloudinary } from "cloudinary";
+
 export const getUserProfile = async (req, res) => {
   const { username } = req.params;
   try {

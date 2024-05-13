@@ -1,42 +1,87 @@
-#root {
-  max-width: 1280px;
+@import "./reset.css";
+
+:root {
+  --color-primary: #6c63ff;
+  --text-color: black;
+  --color-bg: rgb(236, 236, 236);
+  --color-card: white;
+  --color-soft: #aaaaaa;
+  --color-border: lightgray;
+  --color-red: red;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.container {
+  max-width: 991px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 600;
+  color: var(--text-color);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user img {
+  width: 33px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.user h4 {
+  color: var(--color-primary);
+}
+body {
+  background: var(--color-bg);
+  color: var(--color-soft);
+  font-size: 1.6rem;
 }
 
-.card {
-  padding: 2em;
+small,
+p {
+  color: var(--color-soft);
 }
 
-.read-the-docs {
-  color: #888;
+.btn {
+  padding: 1rem 2.6rem;
+  display: inline-block;
+  width: fit-content;
+  cursor: pointer;
+  border-radius: 0.8rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  transition: 0.3s ease;
+  border: none;
+  background-color: white;
+}
+.btn:hover {
+  opacity: 0.7;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+.btn-red {
+  background: var(--color-red);
+  color: white;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 20% 54% 23%;
+  gap: 3%;
+  width: 100%;
 }

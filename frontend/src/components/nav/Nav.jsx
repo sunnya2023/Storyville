@@ -5,6 +5,8 @@ import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { BsBell } from "react-icons/bs";
 import { FaBars } from "react-icons/fa6";
 import CurrentUser from "../../FackApis/CurrentUserData";
+import DarkMode from "../darkmode/DarkMode";
+
 function Nav() {
   return (
     <nav>
@@ -32,6 +34,9 @@ function Nav() {
           <Link to="/">
             <BsBell />
           </Link>
+
+          <DarkMode />
+
           <Link to="/">
             <FaBars />
           </Link>

@@ -1,0 +1,6 @@
+.dark-moodi-icon {
+  transition: all 0.3s ease;
+}
+.dark-moodi-icon:hover {
+  transform: scale(1.2);
+}

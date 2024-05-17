@@ -9,6 +9,11 @@
   --color-border: lightgray;
   --color-red: red;
 }
+.darkmode {
+  --text-color: white;
+  --color-bg: black;
+  --color-card: #111111;
+}
 
 html {
   font-size: 62.5%;
@@ -47,6 +52,7 @@ body {
   background: var(--color-bg);
   color: var(--color-soft);
   font-size: 1.6rem;
+  overflow-x: hidden;
 }
 
 small,
@@ -84,4 +90,19 @@ main {
   grid-template-columns: 20% 54% 23%;
   gap: 3%;
   width: 100%;
+}
+
+@media (max-width: 1024px) {
+  main {
+    grid-template-columns: 8% 56% 32%;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 100%;
+  }
+  .container {
+    width: 94%;
+  }
 }

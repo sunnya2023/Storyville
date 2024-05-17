@@ -1,0 +1,44 @@
+.postForm {
+  background: var(--color-card);
+  padding: 2rem;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.postForm .form-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem;
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.postForm .form-top input {
+  color: var(--color-primary);
+  width: 100%;
+  padding: 1.6rem;
+  background: transparent;
+}
+.post-categories {
+  display: flex;
+  gap: 3rem;
+  font-size: 1.6rem;
+}
+.post-categories div {
+  display: flex;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+.post-categories input {
+  display: none;
+}
+
+.post-categories div:hover {
+  color: var(--color-primary);
+}

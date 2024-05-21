@@ -69,10 +69,16 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     const passwordCheck = await bcrypt.compare(password, user?.password || "");
-    if (!user || !passwordCheck) {
-      return res
-        .status(400)
-        .json({ error: "이메일 또는 비밀번호를 확인해주세요" });
+    // if (!user || !passwordCheck) {
+    //   return res
+    //     .status(400)
+    //     .json({ error: "이메일 또는 비밀번호를 확인해주세요" });
+    // }
+    if (!user) {
+      return res.status(400).json({ error: "이메일을 확인해주세요" });
+    }
+    if (!passwordCheck) {
+      return res.status(400).json({ error: "비밀번호를 확인해주세요" });
     }
 
     generateTokenAndSetCookie(user._id, res);

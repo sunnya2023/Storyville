@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import LeftBar from "../components/leftbar/LeftBar";
 import Nav from "../components/nav/Nav";
 import RightBar from "../components/rightbar/RightBar";
@@ -8,6 +9,7 @@ import Profile from "../pages/profile/Profile";
 import SignUp from "../pages/signup/SignUp";
 import "./layout.css";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import RequireAuth from "../components/auth/RequireAuth";
 
 function LayOut() {
   const Feed = () => {
@@ -28,19 +30,25 @@ function LayOut() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Feed />,
+      element: <RequireAuth />,
       children: [
         {
           path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/profile/:id",
-          element: <Profile />,
-        },
-        {
-          path: "/chatbox/:id",
-          element: <ChatBox />,
+          element: <Feed />,
+          children: [
+            {
+              path: "/",
+              element: <Home />,
+            },
+            {
+              path: "/profile/:id",
+              element: <Profile />,
+            },
+            {
+              path: "/chatbox/:id",
+              element: <ChatBox />,
+            },
+          ],
         },
       ],
     },

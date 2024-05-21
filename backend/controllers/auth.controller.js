@@ -10,12 +10,14 @@ export const signup = async (req, res) => {
       /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
 
     if (!emailRegex.test(email)) {
-      return res.status(400).json({ error: "유효하지 않은 이메일입니다." });
+      return res
+        .status(400)
+        .json({ error: "이메일 형식이 올바르지 않습니다." });
     }
 
     const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(400).json({ error: " 이미 사용중입니다." });
+      return res.status(400).json({ error: " 이미 사용중인 이름입니다." });
     }
 
     const existingEmail = await User.findOne({ email });
@@ -29,9 +31,10 @@ export const signup = async (req, res) => {
     if (!passwordRegex.test(password)) {
       return res.status(400).json({
         error:
-          "비밀번호는 6자 이상이어야 하며, 숫자/소문자/특수문자를 모두 포함해야 합니다.",
+          "비밀번호는 6자 이상, 영문/숫자/특수문자를 모두 포함해야 합니다.",
       });
     }
+    //hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 

@@ -10,9 +10,9 @@ function Login() {
             -<br /> Storyville <br />-
           </h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-            aliquam excepturi molestiae consequatur, nostrum dicta animi
-            provident possimus quas qui.
+            안녕하세요!
+            <br /> Storyville에서 당신의 멋진 이야기를 <br />
+            이어가세요.
           </p>
           <span>계정이 없으신가요? </span>
           <Link to="/signup">

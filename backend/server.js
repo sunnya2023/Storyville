@@ -10,11 +10,11 @@ import notificationRoutes from "./routes/notification.route.js";
 
 import connectMongoDB from "./db/connectMongoDB.js";
 
+dotenv.config();
+console.log(process.env.MONGO_URI);
+
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-dotenv.config();
-// console.log(process.env.MONGO_URL);
 
 cloudinary.config({
   cloud_name: process.env.cloud_name,

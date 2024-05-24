@@ -8,6 +8,8 @@ export const createPost = async (req, res) => {
     let { text, img } = req.body;
     const userId = req.user._id;
     const user = await User.findById(userId);
+    console.log("Request body:", req.body);
+    console.log("User ID:", userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -15,15 +17,18 @@ export const createPost = async (req, res) => {
     if (!text && !img) {
       return res.status(400).json({ error: "Post must have text or img" });
     }
+
     const newPost = new Post({
       user: userId,
       text,
-      img,
+      // img,
     });
 
     if (img) {
       const uploadedResponse = await cloudinary.uploader.upload(img);
-      const img = uploadedResponse.secure_url;
+      // const img = uploadedResponse.secure_url;
+      console.log("Cloudinary response:", uploadedResponse);
+      newPost.img = uploadedResponse.secure_url;
     }
 
     await newPost.save();

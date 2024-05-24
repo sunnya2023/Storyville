@@ -40,7 +40,7 @@ function FeedList() {
       {!isLoading && !isRefetching && feed && (
         <div className="feeds">
           {feed.map((feed) => (
-            <Feed key={feed.id} feed={feed} />
+            <Feed key={feed._id} feed={feed} />
           ))}
         </div>
       )}

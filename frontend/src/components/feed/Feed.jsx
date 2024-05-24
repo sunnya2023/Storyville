@@ -67,7 +67,7 @@ function Feed({ feed }) {
         <Link to="/profile/id">
           <div className="user">
             <img
-              src={postUser?.profileImg || "avartar.png"}
+              src={postUser?.profileImg || "avatar.png"}
               alt={feed.username}
             />
 
@@ -106,8 +106,8 @@ function Feed({ feed }) {
       </div>
 
       <div className="mid-content">
-        <p>{feed.text}</p>
-        <img src={feed.feedImage} alt={feed.name} />
+        {feed.text && <p>{feed.text}</p>}
+        {feed.img && <img src={feed.img} alt="post" />}
       </div>
 
       <div className="bottom-content">

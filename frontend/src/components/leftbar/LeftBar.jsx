@@ -45,6 +45,7 @@ function LeftBar() {
   });
 
   const { data: authUser } = AuthUser();
+
   return (
     <div className="leftBar">
       <div className="leftContainer">
@@ -61,7 +62,7 @@ function LeftBar() {
               {authUser && (
                 <>
                   <img
-                    src={authUser?.profileImg || "/avatar-placeholder.png"}
+                    src={authUser?.profileImg || "/avatar.png"}
                     alt={authUser?.name}
                   />
                   <h4>{authUser?.username}</h4>

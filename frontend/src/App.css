@@ -87,7 +87,7 @@ p {
 
 main {
   display: grid;
-  grid-template-columns: 20% 54% 23%;
+  grid-template-columns: 16% 54% 30%;
   gap: 3%;
   width: 100%;
 }

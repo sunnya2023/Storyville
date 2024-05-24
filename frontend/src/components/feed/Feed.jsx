@@ -44,9 +44,22 @@ function Feed({ feed }) {
     },
   });
 
+  const handleOpenModal = () => {
+    setModalOpen((prev) => !prev);
+  };
+
   const handleDeletePost = () => {
+    setBtnActive("확인");
+    setModalOpen(false);
     deletPost();
   };
+  const handleCancelDelete = () => {
+    setBtnActive("취소");
+    setModalOpen(false);
+  };
+  const [btnActive, setBtnActive] = useState("확인");
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <div className="feed" key={feed._id}>
@@ -66,8 +79,29 @@ function Feed({ feed }) {
         </Link>
         {isMyPost && (
           <button>
-            <MdDelete onClick={handleDeletePost} />
+            <MdDelete onClick={handleOpenModal} />
           </button>
+        )}
+        {modalOpen && (
+          <div className="modal-wrapper">
+            <div className="modal-contents">
+              <p>삭제하시겠습니까?</p>
+              <div className="modalBtn ">
+                <button
+                  onClick={handleDeletePost}
+                  className={btnActive === "확인" ? "active" : ""}
+                >
+                  확인
+                </button>
+                <button
+                  onClick={handleCancelDelete}
+                  className={btnActive === "취소" ? "active" : ""}
+                >
+                  취소
+                </button>
+              </div>
+            </div>
+          </div>
         )}
       </div>
 

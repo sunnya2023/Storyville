@@ -5,15 +5,47 @@ import { FaList } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaComment } from "react-icons/fa";
 import { FaShare } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import { useState } from "react";
 import Comment from "../comment/Comment";
+import AuthUser from "../auth/AuthUser";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
 
 function Feed({ feed }) {
   const [openComment, setOpenComment] = useState(false);
+  const { data: authUser } = AuthUser();
   const postUser = feed.user;
-
+  const isMyPost = authUser._id === feed.user._id;
+  const queryClient = useQueryClient();
   const CommentHandle = () => {
     setOpenComment(!openComment);
+  };
+
+  const { mutate: deletPost, isPending } = useMutation({
+    mutationFn: async () => {
+      try {
+        const res = await fetch(`/api/posts/${feed._id}`, {
+          method: "DELETE",
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || "Something went wrong");
+        }
+
+        return data;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    onSuccess: () => {
+      toast.success("게시글이 삭제되었습니다");
+      queryClient.invalidateQueries({ queryKey: ["feed"] });
+    },
+  });
+
+  const handleDeletePost = () => {
+    deletPost();
   };
 
   return (
@@ -32,13 +64,15 @@ function Feed({ feed }) {
             </div>
           </div>
         </Link>
-        <span>
-          <FaList />
-        </span>
+        {isMyPost && (
+          <button>
+            <MdDelete onClick={handleDeletePost} />
+          </button>
+        )}
       </div>
 
       <div className="mid-content">
-        <p>{feed.desc}</p>
+        <p>{feed.text}</p>
         <img src={feed.feedImage} alt={feed.name} />
       </div>
 

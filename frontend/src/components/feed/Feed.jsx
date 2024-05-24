@@ -10,19 +10,24 @@ import Comment from "../comment/Comment";
 
 function Feed({ feed }) {
   const [openComment, setOpenComment] = useState(false);
+  const postUser = feed.user;
 
   const CommentHandle = () => {
     setOpenComment(!openComment);
   };
 
   return (
-    <div className="feed" key={feed.id}>
+    <div className="feed" key={feed._id}>
       <div className="top-content">
         <Link to="/profile/id">
           <div className="user">
-            <img src={feed.feedProfile} alt={feed.name} />
+            <img
+              src={postUser?.profileImg || "avartar.png"}
+              alt={feed.username}
+            />
+
             <div>
-              <h5>{feed.name}</h5>
+              <h5>{postUser.username}</h5>
               <small>1 Minutes Ago</small>
             </div>
           </div>

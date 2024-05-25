@@ -50,6 +50,9 @@
   gap: 5px;
 }
 
+.feed .bottom-content .action-item .select {
+  color: red;
+}
 /* Modal css */
 .modal-wrapper {
   position: fixed;

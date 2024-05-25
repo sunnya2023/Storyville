@@ -11,6 +11,7 @@ import Comment from "../comment/Comment";
 import AuthUser from "../auth/AuthUser";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
+import useLikedPost from "../hooks/useLikedPost";
 
 function Feed({ feed }) {
   const [openComment, setOpenComment] = useState(false);
@@ -18,6 +19,10 @@ function Feed({ feed }) {
   const postUser = feed.user;
   const isMyPost = authUser._id === feed.user._id;
   const queryClient = useQueryClient();
+  //delete Modal
+  const [btnActive, setBtnActive] = useState("확인");
+  const [modalOpen, setModalOpen] = useState(false);
+
   const CommentHandle = () => {
     setOpenComment(!openComment);
   };
@@ -57,9 +62,14 @@ function Feed({ feed }) {
     setBtnActive("취소");
     setModalOpen(false);
   };
-  const [btnActive, setBtnActive] = useState("확인");
 
-  const [modalOpen, setModalOpen] = useState(false);
+  // 좋아요
+  const isLiked = feed.likes.includes(authUser._id);
+  const { likePost, isLiking } = useLikedPost(feed);
+  const handleLikePost = () => {
+    if (isLiking) return;
+    likePost();
+  };
 
   return (
     <div className="feed" key={feed._id}>
@@ -112,8 +122,11 @@ function Feed({ feed }) {
 
       <div className="bottom-content">
         <div className="action-item">
-          <FaHeart />
-          <span>14 Like</span>
+          <FaHeart
+            onClick={handleLikePost}
+            className={isLiked ? "select" : ""}
+          />
+          <span>{feed.likes.length} Like</span>
         </div>
         <div className="action-item" onClick={CommentHandle}>
           <FaComment />

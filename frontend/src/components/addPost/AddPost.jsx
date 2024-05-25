@@ -97,7 +97,7 @@ function AddPost() {
     adjustTextArearSize();
   }, [text]);
 
-  console.log("Creating post with:", { text, img });
+  // console.log("Creating post with:", { text, img });
   return (
     <form className="postForm" onSubmit={onSubmitHandle}>
       <div className="user form-top">

@@ -2,6 +2,7 @@ import React from "react";
 import "./friend.css";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import useFollow from "../hooks/useFollow";
 
 const SuggestFreind = () => {
   const { data: suggestedUsers, isLoading } = useQuery({
@@ -22,7 +23,8 @@ const SuggestFreind = () => {
     },
   });
   //   if (suggestedUsers.length === 0) return <div></div>;
-  console.log(suggestedUsers);
+  // console.log(suggestedUsers.length);
+  const { follow } = useFollow();
 
   return (
     <>
@@ -46,7 +48,15 @@ const SuggestFreind = () => {
               </Link>
 
               <div className="action">
-                <button className="followBtn ">Follow</button>
+                <button
+                  className="followBtn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    follow(friend._id);
+                  }}
+                >
+                  Follow
+                </button>
               </div>
             </div>
           ))}

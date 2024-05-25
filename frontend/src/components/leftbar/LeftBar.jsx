@@ -70,7 +70,7 @@ function LeftBar() {
               )}
             </div>
           </Link>
-          <Link to={"/"}>
+          <Link to={"/friend"}>
             <div className="item">
               <img src={Friend} />
               <h4>Friend</h4>

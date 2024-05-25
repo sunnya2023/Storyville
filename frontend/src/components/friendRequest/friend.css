@@ -1,0 +1,49 @@
+.request {
+  background: var(--color-card);
+  border-radius: 1.6rem;
+  margin-top: 1.6rem;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  overflow: scroll;
+}
+.request::-webkit-scrollbar {
+  display: none;
+}
+.request h5 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.request .action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.suggest {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-card);
+  border-radius: 1.6rem;
+  margin-top: 1.6rem;
+  padding: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.suggest h5 {
+  font-size: 1.4rem;
+}
+.suggest h6 {
+  font-size: 1.2rem;
+}
+
+.suggest .followBtn {
+  font-size: 1.2rem;
+  background: var(--color-primary);
+  color: var(--color-card);
+  padding: 0.8rem 1rem;
+  border-radius: 0.8rem;
+}

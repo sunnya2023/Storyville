@@ -119,8 +119,8 @@ function AddPost() {
               <img src={img} alt="post" />
               <FaXmark
                 onClick={() => {
-                  setImg("");
-                  imgRef.current.value = null;
+                  setImg(""); //이미지 상태 초기화
+                  imgRef.current.value = null; //input값 비우기
                 }}
               />
             </div>

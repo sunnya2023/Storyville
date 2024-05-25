@@ -1,5 +1,5 @@
 import Firends from "../../FackApis/FirendReqData";
-import "./friendReq.css";
+import "./friend.css";
 import { Link } from "react-router-dom";
 
 function FriendReq() {

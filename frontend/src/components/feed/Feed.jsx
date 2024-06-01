@@ -1,7 +1,7 @@
 import "./feedList.css";
 
 import { Link } from "react-router-dom";
-import { FaList } from "react-icons/fa";
+// import { FaList } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaComment } from "react-icons/fa";
 import { FaShare } from "react-icons/fa";
@@ -23,11 +23,7 @@ function Feed({ feed }) {
   const [btnActive, setBtnActive] = useState("확인");
   const [modalOpen, setModalOpen] = useState(false);
 
-  const CommentHandle = () => {
-    setOpenComment(!openComment);
-  };
-
-  const { mutate: deletPost, isPending } = useMutation({
+  const { mutate: deletPost } = useMutation({
     mutationFn: async () => {
       try {
         const res = await fetch(`/api/posts/${feed._id}`, {
@@ -69,6 +65,10 @@ function Feed({ feed }) {
   const handleLikePost = () => {
     if (isLiking) return;
     likePost();
+  };
+
+  const handleComment = () => {
+    setOpenComment(!openComment);
   };
 
   return (
@@ -128,16 +128,16 @@ function Feed({ feed }) {
           />
           <span>{feed.likes.length} Like</span>
         </div>
-        <div className="action-item" onClick={CommentHandle}>
+        <div className="action-item" onClick={handleComment}>
           <FaComment />
-          <span>4 comment</span>
+          <span>{feed.comments.length} comment</span>
         </div>
         <div className="action-item">
           <FaShare />
           <span>1 share</span>
         </div>
       </div>
-      {openComment && <Comment />}
+      {openComment && <Comment feed={feed} />}
     </div>
   );
 }

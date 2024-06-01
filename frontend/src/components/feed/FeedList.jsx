@@ -33,7 +33,7 @@ function FeedList() {
   }, [refetch]);
   return (
     <>
-      {isLoading && <PostSkeleton />}
+      {isLoading && "로딩중"}
       {!isLoading && !isRefetching && feed.length === 0 && (
         <div>게시글이 없습니다.</div>
       )}

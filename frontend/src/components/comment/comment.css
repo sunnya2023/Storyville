@@ -22,3 +22,15 @@
   border: 1px solid var(--color-soft);
   background: transparent;
 }
+
+.comments .reply {
+  color: var(--text2-color);
+  padding-left: 4rem;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.8rem;
+}

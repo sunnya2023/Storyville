@@ -19,7 +19,7 @@ function Message() {
       <div className="border-div"></div>
 
       {Messages.map((mess) => (
-        <Link to="/chatbox/id" key={mess.key} className="message">
+        <Link to="/chatbox/id" key={mess.id} className="message">
           <div className="user">
             <img src={mess.img} alt={mess.name} />
             <div className="green-active"></div>

@@ -56,9 +56,9 @@ export const deletePost = async (req, res) => {
       await cloudinary.uploader.destroy(imgId);
     }
 
-    await Post.findByIdAndDelete(req.params.id);
+    const result = await Post.findByIdAndDelete(req.params.id);
 
-    res.status(200).json({ message: "Post deleted successfully" });
+    res.status(200).json(result);
   } catch (error) {
     console.log("Error in deletePost controller", error);
     res.status(500).json({ error: "Internal Server error" });
@@ -83,11 +83,58 @@ export const commentOnPost = async (req, res) => {
     const comment = { user: userId, text };
     post.comments.push(comment);
 
-    await post.save();
+    const result = await post.save();
 
-    res.status(200).json(post);
+    res.status(200).json(result);
   } catch (error) {
     console.log("Error in commentOnPost controller", error);
+    res.status(500).json({ error: "Internal Server error" });
+  }
+};
+
+export const deleteComment = async (req, res) => {
+  try {
+    const commentId = req.params.id;
+    const userId = req.user._id;
+
+    // 게시물을 찾아서 해당 댓글을 삭제
+    const post = await Post.findOne({ "comments._id": commentId }); // 해당 댓글을 포함한 게시물 찾기
+
+    if (!post) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+
+    const commentToDelete = post.comments.find(
+      (comment) => comment._id.toString() === commentId
+    );
+
+    if (!commentToDelete) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+
+    if (commentToDelete.user.toString() !== userId.toString()) {
+      return res
+        .status(401)
+        .json({ error: "You are not authorized to delete this comment" });
+    }
+
+    // 삭제 권한이 있으면 댓글 삭제
+    // await post.updateOne({ $pull: { comments: { _id: commentId } } });
+
+    // res.status(200).json({ message: "Comment deleted successfully" });
+
+    // Remove the comment from the comments array
+    post.comments = post.comments.filter(
+      ({ _id }) => _id.toString() !== commentId
+    );
+
+    // Save the updated post
+    const result = await post.save();
+
+    // Return the updated comments array
+    res.status(200).json(result);
+  } catch (error) {
+    console.log("Error in deleteComment controller", error);
     res.status(500).json({ error: "Internal Server error" });
   }
 };

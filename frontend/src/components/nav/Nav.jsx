@@ -4,10 +4,11 @@ import { FaHome, FaUser, FaSearch } from "react-icons/fa";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { BsBell } from "react-icons/bs";
 import { FaBars } from "react-icons/fa6";
-import CurrentUser from "../../FackApis/CurrentUserData";
 import DarkMode from "../darkmode/DarkMode";
+import AuthUser from "../auth/AuthUser";
 
 function Nav() {
+  const { data: authUser } = AuthUser();
   return (
     <nav>
       <div className="nav-container">
@@ -31,7 +32,7 @@ function Nav() {
           <Link to="/chatbox/id">
             <IoChatbubbleEllipsesOutline />
           </Link>
-          <Link to="/">
+          <Link to="/notification">
             <BsBell />
           </Link>
 
@@ -40,11 +41,12 @@ function Nav() {
           <Link to="/">
             <FaBars />
           </Link>
-          <div className="user">
-            {CurrentUser.map((user) => (
-              <img key={user.id} src={user.ProfieImage} alt={user.name} />
-            ))}
-          </div>
+          <Link to={`/profile/${authUser.username}`} className="user">
+            <img
+              src={authUser.ProfieImage || "/avatar.png"}
+              alt={authUser.username}
+            />
+          </Link>
         </div>
       </div>
     </nav>

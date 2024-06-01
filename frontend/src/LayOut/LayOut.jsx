@@ -7,6 +7,7 @@ import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Profile from "../pages/profile/Profile";
 import SignUp from "../pages/signup/SignUp";
+import Notification from "../pages/notification/Notification";
 import "./layout.css";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import RequireAuth from "../components/auth/RequireAuth";
@@ -47,6 +48,10 @@ function LayOut() {
             {
               path: "/chatbox/:id",
               element: <ChatBox />,
+            },
+            {
+              path: "/notification",
+              element: <Notification />,
             },
           ],
         },

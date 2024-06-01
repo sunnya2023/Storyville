@@ -9,12 +9,15 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MdDelete } from "react-icons/md";
 import { FaList } from "react-icons/fa";
 import Modal from "../common/modal/Modal";
+import { formatDistanceToNow } from "date-fns";
 
 function Comment({ feed }) {
   const { data: authUser } = AuthUser();
   const { commentPost, isCommenting, text, setText } = useComment(feed);
   const textRef = useRef(null);
-
+  const formatDate = (dateString) => {
+    return formatDistanceToNow(new Date(dateString), { addSuffix: true });
+  };
   const queryClient = useQueryClient();
 
   const onChangeText = (e) => {
@@ -96,7 +99,7 @@ function Comment({ feed }) {
                   />
                 </Link>
                 <h5>{comment.user.username}</h5>
-                <small>1h</small>
+                <small>{formatDate(feed.updatedAt)}</small>
               </div>
               {isMyComment && (
                 <MdDelete onClick={() => deleteComment(comment._id)} />

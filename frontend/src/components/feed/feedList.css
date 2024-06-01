@@ -30,6 +30,9 @@
 .feed p {
   margin-bottom: 1.6rem;
 }
+.feed .mid-content {
+  color: var(--text-color);
+}
 
 .feed .mid-content img {
   max-height: 400px;

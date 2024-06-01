@@ -34,3 +34,7 @@
   align-items: center;
   margin-top: 0.8rem;
 }
+
+.comments .reply {
+  color: var(--text-color);
+}

@@ -56,8 +56,7 @@ body {
   overflow-x: hidden;
 }
 
-small,
-p {
+small {
   color: var(--color-soft);
 }
 

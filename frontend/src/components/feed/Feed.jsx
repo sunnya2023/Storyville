@@ -12,6 +12,7 @@ import AuthUser from "../auth/AuthUser";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import useLikedPost from "../hooks/useLikedPost";
+import { formatDistanceToNow } from "date-fns";
 
 function Feed({ feed }) {
   const [openComment, setOpenComment] = useState(false);
@@ -22,6 +23,10 @@ function Feed({ feed }) {
   //delete Modal
   const [btnActive, setBtnActive] = useState("확인");
   const [modalOpen, setModalOpen] = useState(false);
+
+  const formatDate = (dateString) => {
+    return formatDistanceToNow(new Date(dateString), { addSuffix: true });
+  };
 
   const { mutate: deletPost } = useMutation({
     mutationFn: async () => {
@@ -83,7 +88,7 @@ function Feed({ feed }) {
 
             <div>
               <h5>{postUser.username}</h5>
-              <small>1 Minutes Ago</small>
+              <small>{formatDate(feed.createdAt)}</small>
             </div>
           </div>
         </Link>

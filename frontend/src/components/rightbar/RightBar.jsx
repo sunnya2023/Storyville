@@ -9,7 +9,7 @@ function RightBar() {
       <div className="rightBar-container">
         <Message />
         <SuggestFreind />
-        <FriendReq />
+        {/* <FriendReq /> */}
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AddPost from "../../components/addPost/AddPost";
 
 import FeedList from "../../components/feed/FeedList";

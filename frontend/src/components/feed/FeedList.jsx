@@ -5,7 +5,24 @@ import Feed from "./Feed";
 import "./feedList.css";
 import { useQuery } from "@tanstack/react-query";
 
-function FeedList() {
+function FeedList({ feedType, username, userId }) {
+  const getPostEndpoint = () => {
+    switch (feedType) {
+      case "forYou":
+        return "/api/posts/all";
+      case "following":
+        return "/api/posts/following";
+      case "posts":
+        return `/api/posts/user/${username}`;
+      case "likes":
+        return `/api/posts/likes/${userId}`;
+      default:
+        return "/api/posts/all";
+    }
+  };
+
+  const END_POINT = getPostEndpoint();
+
   const {
     data: feed,
     isLoading,
@@ -15,7 +32,7 @@ function FeedList() {
     queryKey: ["feed"],
     queryFn: async () => {
       try {
-        const res = await fetch("/api/posts/all");
+        const res = await fetch(END_POINT);
         const data = await res.json();
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong");
@@ -30,7 +47,7 @@ function FeedList() {
 
   useEffect(() => {
     refetch();
-  }, [refetch]);
+  }, [refetch, username, userId, feedType]);
   return (
     <>
       {isLoading && "로딩중"}

@@ -9,15 +9,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MdDelete } from "react-icons/md";
 import { FaList } from "react-icons/fa";
 import Modal from "../common/modal/Modal";
-import { formatDistanceToNow } from "date-fns";
+import formatDate from "../../utils/date";
 
 function Comment({ feed }) {
   const { data: authUser } = AuthUser();
   const { commentPost, isCommenting, text, setText } = useComment(feed);
   const textRef = useRef(null);
-  const formatDate = (dateString) => {
-    return formatDistanceToNow(new Date(dateString), { addSuffix: true });
-  };
+
   const queryClient = useQueryClient();
 
   const onChangeText = (e) => {

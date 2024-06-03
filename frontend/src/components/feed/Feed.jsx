@@ -12,7 +12,8 @@ import AuthUser from "../auth/AuthUser";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import useLikedPost from "../hooks/useLikedPost";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistance, sub } from "date-fns";
+import formatDate from "../../utils/date";
 
 function Feed({ feed }) {
   const [openComment, setOpenComment] = useState(false);
@@ -21,12 +22,7 @@ function Feed({ feed }) {
   const isMyPost = authUser._id === feed.user._id;
   const queryClient = useQueryClient();
   //delete Modal
-  const [btnActive, setBtnActive] = useState("확인");
   const [modalOpen, setModalOpen] = useState(false);
-
-  const formatDate = (dateString) => {
-    return formatDistanceToNow(new Date(dateString), { addSuffix: true });
-  };
 
   const { mutate: deletPost } = useMutation({
     mutationFn: async () => {
@@ -55,12 +51,10 @@ function Feed({ feed }) {
   };
 
   const handleDeletePost = () => {
-    setBtnActive("확인");
     setModalOpen(false);
     deletPost();
   };
   const handleCancelDelete = () => {
-    setBtnActive("취소");
     setModalOpen(false);
   };
 
@@ -79,10 +73,10 @@ function Feed({ feed }) {
   return (
     <div className="feed" key={feed._id}>
       <div className="top-content">
-        <Link to="/profile/id">
+        <Link to={`/profile/${feed.user.username}`}>
           <div className="user">
             <img
-              src={postUser?.profileImg || "avatar.png"}
+              src={postUser?.profileImg || "/avatar.png"}
               alt={feed.username}
             />
 
@@ -102,18 +96,10 @@ function Feed({ feed }) {
             <div className="modal-contents">
               <p>삭제하시겠습니까?</p>
               <div className="modalBtn ">
-                <button
-                  onClick={handleDeletePost}
-                  className={btnActive === "확인" ? "active" : ""}
-                >
+                <button onClick={handleDeletePost} className="active">
                   확인
                 </button>
-                <button
-                  onClick={handleCancelDelete}
-                  className={btnActive === "취소" ? "active" : ""}
-                >
-                  취소
-                </button>
+                <button onClick={handleCancelDelete}>취소</button>
               </div>
             </div>
           </div>

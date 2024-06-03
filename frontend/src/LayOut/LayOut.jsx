@@ -11,6 +11,7 @@ import Notification from "../pages/notification/Notification";
 import "./layout.css";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import RequireAuth from "../components/auth/RequireAuth";
+import UserProfile from "../pages/profile/userProfile";
 
 function LayOut() {
   const Feed = () => {
@@ -43,7 +44,7 @@ function LayOut() {
             },
             {
               path: "/profile/:username",
-              element: <Profile />,
+              element: <UserProfile />,
             },
             {
               path: "/chatbox/:id",
